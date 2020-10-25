@@ -9,6 +9,7 @@ import Admin from './Components/AdminScreen';
 import Navbar from './Components/NavbarScreen';
 import Category from './Components/CategoryScreen';
 import Reader from './Components/ReaderScreen';
+import NoPage from './Components/NoPage';
 import PrivateRoute from './Components/PrivateRoutes';
 import {AuthProvider} from './Components/Provider/authProvider';
 import {AdminProductProvider} from './Components/Provider/AdminDataProvider';
@@ -48,6 +49,10 @@ const Routes = [
   {
    path:'/read/:id',
    component:Reader
+  },
+  {
+   path:'*',
+   component:NoPage
   }
 ]
 
@@ -58,8 +63,7 @@ function App() {
           <AuthProvider>
               <Router>
                     <Route exact path='/' component={LandingPage}/>
-               
-                    <Route path={['/home','/profile','/addliterature','/mycollection','/addbook','/detail/:id','/read/:id','/admin','/category','/read/:id']}>
+                    <Route path={['/home','/profile','/addliterature','/mycollection','/addbook','/detail/:id','/read/:id','/admin','/category','/read/:id','*']}>
                     <div>
                           <AdminProductProvider>
                               <ProductContextProvider>
