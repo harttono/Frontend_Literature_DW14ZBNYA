@@ -117,20 +117,20 @@ const DetailScreen = (props) => {
    
     //download file
     const downloadFiles = async (filename) =>{
+   
        await Axios({
-            url: 'http://localhost:5000/api/v1/files',
+            url: `${filename}`,
             method: 'GET',
             responseType: 'blob',
-        }).then((response) => {
+            }).then((response) => {
              var fileURL = window.URL.createObjectURL(new Blob([response.data]));
              var fileLink = document.createElement('a');
-        
              fileLink.href = fileURL;
              fileLink.setAttribute('download', `${filename}`);
              document.body.appendChild(fileLink);
-        
              fileLink.click();
         });    
+
     }
        
     
@@ -174,6 +174,7 @@ const DetailScreen = (props) => {
                                         <p>{book.ISBN}</p>
                                     </li>
                                     <li className="list-group-item">
+                                        {console.log('isi book',book.attachment)}
                                         <button className="detail-book-addbtn btn__primary p-2" onClick={() => downloadFiles(book.attachment)}>Download. <BiCloudDownload/></button>
                                     </li>
                                 </ul>    

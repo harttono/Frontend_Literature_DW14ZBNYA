@@ -32,7 +32,8 @@ export default function AddLiteratureScreen(props) {
         ISBN:'',
         description:''
     })
-    
+    const {publication} = formData;
+ 
     const handleChange = (e) =>{
         setFormData({...formData,[e.target.name]:e.target.value})
     }
@@ -142,7 +143,7 @@ export default function AddLiteratureScreen(props) {
     return (
         <div className="container">
             <div className='add-book__page text-white'>
-                <h1>Add Book</h1>
+                <h1>Add Literature</h1>
                 <form>
                     <div className="form-group">
                         <input type="text" name="title" autoComplete="off" onChange={ (e) => handleChange(e)} className="form-control" placeholder="Title"/>
@@ -179,7 +180,7 @@ export default function AddLiteratureScreen(props) {
                 </form>
                 <div className="add-book__page-btn">
                     <button class='add-book-btn' onClick={(e) => onSaved(e)} disabled={urlCover == null}>
-                        <span>Add Book</span><BiBookAdd/>
+                        <span>Add Literature</span><BiBookAdd/>
                     </button>
                     <Message show={showMessage} hide = {closeModal} />
                 </div>

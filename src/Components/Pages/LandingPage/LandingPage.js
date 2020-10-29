@@ -51,7 +51,7 @@ function LandingPage(props) {
                     </div>    
                     <div className="banner-text-paragraf">
                         <p>
-                            Sign-up and receive unlimited accesss to all of your literatur - share your literature.
+                            Sign-up and receive unlimited accesss to all of your literature - share your literature.
                         </p>
                     </div>
                     <div className='banner-button'>

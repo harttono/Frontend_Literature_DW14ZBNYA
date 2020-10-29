@@ -3,6 +3,7 @@ import {FaCheckCircle} from 'react-icons/fa';
 import {IconContext } from 'react-icons/lib';
 import {useAuth} from './Provider/authProvider';
 import {AdminProductContext} from './Provider/AdminDataProvider';
+import {Link} from 'react-router-dom';
 import Axios from 'axios';
 import Loader from './Loader';
 import {LIST_PRODUCTS_USER_REQUEST,LIST_PRODUCTS_USER_SUCCESS,LIST_PRODUCTS_USER_FAIL, 
@@ -112,9 +113,9 @@ export default function Admin() {
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">User Or Author</th>
+                                <th scope="col">Publisher</th>
                                 <th scope="col">ISBN</th>
-                                <th scope="col">E-Book</th>
+                                <th scope="col">Literature</th>
                                 <th scope="col">Status Payment</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -125,7 +126,7 @@ export default function Admin() {
                             <th scope="row">{product.id}</th>
                             <td>{product.userId.fullname}</td>
                             <td>{product.ISBN}</td>
-                            <td>{product.attachment}</td>
+                            <Link to={`/detail/${product.id}`}><td>{product.attachment}</td></Link>
                             <td>{product.status === "approved" ? <p style={{color:"#51B346"}}>{product.status}</p>:
                                  product.status === "waiting to be verificated" ? <p style={{color:"#F7BB00"}}>{product.status}</p> :
                                  product.status === "cancelled" ? <p style={{color:"#F70000"}}>{product.status}</p> : null}

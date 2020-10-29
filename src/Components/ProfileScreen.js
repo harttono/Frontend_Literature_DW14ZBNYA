@@ -11,37 +11,37 @@ function Profile() {
     const {state:authData,dispatch} = useAuth();
     const {isLoading,error,userInfo,info} = authData;
     const [show,setShow] = useState(false);
-    const [disable,able] = useState(false);
+    const [disableText,setDisableText] = useState(true);
     const [dataProfile,setDataProfile] = useState({});
     const [urlProfile,setUrlProfile] = useState('');
+    const [newUrlPicture,setNewUrlPicture] = useState('');
     const [updated,setUpdated] = useState(false);
+    const [message,setMessage] = useState('');
    
     let urls = JSON.parse(localStorage.getItem('url')) || [];
 
-    const updateData = {
-        picture:urlProfile
-    }
-  
-
+    // update profile 
     const onUpdated = async (userId) => {
-        dispatch({
+
+        const updateData = {
+            picture:urlProfile
+        }
+            dispatch({
                 type:UPDATE_USER_REQUEST
             })
         try{    
-        const {data:{message}} = await Axios.patch(`/api/v1/user/${userId}`,updateData,{
+        const {data:{picture}} = await Axios.patch(`/api/v1/user/${userId}`,updateData,{
             headers:{
                 Authorization:`${userInfo.token}`
             }
         })
             dispatch({
                 type:UPDATE_USER_SUCCESS,
-                payload:message,
-                updateProfile:urlProfile
+                payload:picture,
             })
-            if(message){
-                setDataProfile({...dataProfile,picture:urlProfile})
+            if(picture){
+                setNewUrlPicture(picture)
             }
-
         }catch(err){
             dispatch({
                 type:UPDATE_USER_FAIL,
@@ -51,22 +51,40 @@ function Profile() {
         setUpdated(false);
     }
 
+
+    // get url response
     if(urls.length > 0){
         setUrlProfile(urls[0].url);
         localStorage.removeItem('url');
     }
 
       
+    // modal handler
     const openModal = () =>{
         setShow(true);
-        able(true);
+    }
+    const closeModal = () =>{
+        setShow(false);
         setUpdated(true);
     }
-    
+
+
     useEffect(() => {
-        setDataProfile(userInfo);
-            
-    },[])
+        
+        // set data when the first rendering..
+        if(userInfo){
+            setNewUrlPicture(userInfo.picture);
+            setDataProfile(userInfo);
+        }
+         
+        // update picture when state changes
+        if(newUrlPicture){
+            setNewUrlPicture(newUrlPicture);
+        }
+        return () =>{
+            setNewUrlPicture(null)
+        }
+    },[newUrlPicture])
    
         return (
                  <div className='container text-white'> 
@@ -114,10 +132,10 @@ function Profile() {
                                 </ul>
                                 <div className=" profile__page_picture">
                                     <div className="card card-profile">
-                                        <img src={dataProfile.picture} className="card-img-top" alt="..."/>
+                                        <img src={newUrlPicture} className="card-img-top" alt="..."/>
                                         <div className="card-body">
                                             {updated ? <button className="btn btn-success w-100" onClick={ () => onUpdated(dataProfile.id)}>save</button> :  <button class="btn btn-danger w-100" onClick={openModal}>Change your profile</button>}
-                                            <Fileuploader show={show} able={disable}closeModal={() => setShow(false)}/>
+                                            <Fileuploader show={show} able={disableText} closeModal={closeModal}/>
                                         </div>
                                     </div>
                                 </div>

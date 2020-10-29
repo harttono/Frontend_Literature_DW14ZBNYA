@@ -84,7 +84,8 @@ const HomeScreen = (props) => {
     if(date){
         var dateList = date.filter( (elem,index,self) => self.findIndex( t => t.publication === elem.publication) === index);
     }
-
+ 
+    // check every book which marked.
     useEffect(() => {
     let unmounted = false;
     const checkBookmarks = async () =>{
@@ -114,8 +115,8 @@ const HomeScreen = (props) => {
             
     } 
 
+
     checkBookmarks();
-   
     const getProducts = async () =>{
                 dispatch({
             type:GET_PRODUCTS_BY_PUBLICATION_REQUEST
@@ -147,6 +148,7 @@ const HomeScreen = (props) => {
     } 
 
     getProducts();  
+    
     if(year){
         setFlag(true);
     }

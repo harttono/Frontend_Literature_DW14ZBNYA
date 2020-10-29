@@ -76,8 +76,10 @@ function BookViewer(props){
                 
                   <div className="pt-2 reader-btn"> 
                       <div> Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'} </div>  
-                      <button type="button" className="btn btn-primary mx-2" disabled={pageNumber <= 1} onClick={previousPage}> Previous </button>
-                      <button type="button"  className="btn btn-secondary mx-2" disabled={pageNumber >= numPages} onClick={nextPage}> Next </button> 
+                      <div>
+                        <button type="button" className="btn btn-primary mx-2" disabled={pageNumber <= 1} onClick={previousPage}> Previous </button>
+                        <button type="button"  className="btn btn-secondary mx-2" disabled={pageNumber >= numPages} onClick={nextPage}> Next </button> 
+                      </div>
                   </div> 
               </div>
               )): null}

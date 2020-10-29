@@ -137,7 +137,7 @@ function CategoryScreen() {
     return (
         <div className="container">
             <div className="row admin-section">
-                <div className="col-md-7 text-white">
+                <div className="col-md-12 text-white category-section">
                     <div className="addCategory">
                         <h2>List Categories</h2>
                         <button className="btn btn-primary" onClick={openAddModal}>Add New Category</button>

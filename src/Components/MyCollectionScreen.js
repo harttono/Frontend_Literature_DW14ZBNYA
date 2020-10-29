@@ -46,7 +46,7 @@ function MyCollectionScreen() {
             <h1>My Collection</h1>
             <div className="pageBook__Section text-white">
             <div className={'page-books justify-content-start pt-3'}>
-            {isLoading ? <Loader/> : error ? <div>{error}</div> : BookMarkData && BookMarkData.map( (collection,index) => (
+            {isLoading ? <Loader/> : error ? <div>{error}</div> : BookMarkData.length > 0  ?  BookMarkData.map( (collection,index) => (
                 <div className='card' key={index}>
                 <Link to={`/detail/${collection.books.id}`}>
                     <img src={collection.books.cover}  className="card-img-top" alt="book"/>
@@ -59,8 +59,7 @@ function MyCollectionScreen() {
                     </div>
                 </div>
             </div>      
-            ))}
-            {!BookMarkData && <div>No Book Available.</div>}   
+            )): <div>No Literature Available.</div> }
             </div>
         </div>   
         </div>    

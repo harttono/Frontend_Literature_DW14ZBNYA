@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {Modal,Button,Form,Spinner} from 'react-bootstrap';
+import {Modal,Form} from 'react-bootstrap';
 import {useAuth} from '../../Provider/authProvider';
 import {USER_SIGNIN_REQUEST,USER_SIGNIN_FAIL, USER_SIGNIN_SUCCESS} from '../../Provider/constants/Constant';
 import Axios from 'axios';
@@ -38,14 +38,26 @@ function SignIn(props) {
     }
   }
 
-  useEffect(() => {
-    if(error){
-      setInfo(error);
-    }
+
+  if(info){
     setTimeout( () =>{
       setInfo('')
-    },2000)
-  }, [])
+    },2500)
+ }
+
+
+  useEffect(() => {
+  if(error){
+      setInfo(error);
+      dispatch({
+        type:USER_SIGNIN_FAIL,
+        payload:null
+      })
+  }
+  
+  },[error])
+
+
    
   return (
       <>
@@ -65,7 +77,7 @@ function SignIn(props) {
                 <div className="form-content">
                     <Form>
                       <Form.Group>
-                      {error && <div className="flash_info">{error}</div> } 
+                      {info && <div className="flash_info">{info}</div> } 
                       </Form.Group>
                       <Form.Group>
                           <Form.Control type="email" placeholder="Email" name="email" value={email} onChange={e => handleChange(e)} />
@@ -79,9 +91,7 @@ function SignIn(props) {
                       <Form.Group>
                           <div className='exclamation-text'>
                               Dont't have an account ? 
-                              <button onClick={props.openSignInModal}>
-                                  Click Here
-                              </button>    
+                              <button onClick={props.openSignInModal}>Click Here</button>    
                           </div>
                       </Form.Group>
                     </Form>

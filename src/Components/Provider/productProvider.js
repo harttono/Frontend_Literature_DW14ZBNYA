@@ -11,18 +11,11 @@ import {LIST_PRODUCTS_REQUEST, LIST_PRODUCTS_SUCCESS,
         MY_PRODUCTS_REQUEST, MY_PRODUCTS_SUCCESS, MY_PRODUCTS_FAIL,
         ADD_BOOKMARK_REQUEST,ADD_BOOKMARK_SUCCESS,ADD_BOOKMARK_FAIL,
         REMOVE_BOOKMARK_REQUEST, REMOVE_BOOKMARK_SUCCESS,REMOVE_BOOKMARK_FAIL,
-        GET_PRODUCTS_BY_PUBLICATION_REQUEST,GET_PRODUCTS_BY_PUBLICATION_SUCCESS, GET_PRODUCTS_BY_PUBLICATION_FAIL} from './constants/Constant'
+        GET_PRODUCTS_BY_PUBLICATION_REQUEST,GET_PRODUCTS_BY_PUBLICATION_SUCCESS, GET_PRODUCTS_BY_PUBLICATION_FAIL} from './constants/Constant';
+
 export const ProductContext = createContext();
 
 const initialState ={
-    products:[],
-    listCategory:[],
-    myLibrary:[],
-    newBook:{},
-    myBooks:[],
-    categories:[],
-    deletedProduct:{},
-    detailProduct:[],
     publication:[] || Cookie.getJSON('publication')
 }
 const reducer = (state,action) =>{
@@ -133,7 +126,7 @@ const reducer = (state,action) =>{
         case MY_PRODUCTS_SUCCESS:
             return{
                 isLoading:false,
-                myBooks:action.payload
+                myLiterature:action.payload
             }
         case MY_PRODUCTS_FAIL:
             return{

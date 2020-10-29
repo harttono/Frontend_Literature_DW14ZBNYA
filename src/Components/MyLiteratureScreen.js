@@ -10,7 +10,8 @@ export default function CartScreen() {
     const [state,dispatch] = useContext(ProductContext);
     const {state:authState} = useAuth();
     const {userInfo} = authState;
-    const {isLoading,error,myBooks} = state;
+    const {isLoading,error,myLiterature} = state;
+    console.log('isi my', myLiterature)
     useEffect(()=>{
         const getMybook= async () =>{
             dispatch({
@@ -40,8 +41,8 @@ export default function CartScreen() {
     },[])
     return (
           <div className="pageBook__Section pt-4">
-                <div className={myBooks && myBooks.length > 4 ? 'page-books':  'page-books justify-content-start'}>
-                { isLoading ? <Loader/> : error ? <div>{error}</div> : myBooks ? myBooks.map( book => 
+                <div className={myLiterature && myLiterature.length > 4 ? 'page-books':  'page-books justify-content-start'}>
+                { isLoading ? <Loader/> : error ? <div>{error}</div> :  myLiterature ?  myLiterature.map( book => 
                     <div className={book.status == 'approved' ? 'card':'card pending-status-card'} disabled={book.status === "waiting to be verificated"}>
                         {book.status !== "approved" && book.status !== "cancelled" ?
                          <img src={book.cover} className="card-img-top" alt="book"/> :
@@ -59,7 +60,7 @@ export default function CartScreen() {
                         {book.status === "waiting to be verificated" &&<div className="waiting-approval">waiting to be verificated.</div>}
                         {book.status === "cancelled" && <div className="waiting-approval">cancelled.</div>}
                     </div>     
-                ) : <div className="text-white">you don't have a book.</div>}
+                ) : !myLiterature && <div className="text-white">you don't have a literature.</div>}
                 </div>
            </div>
     )

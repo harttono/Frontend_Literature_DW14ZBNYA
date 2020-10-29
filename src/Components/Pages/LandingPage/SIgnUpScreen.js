@@ -44,16 +44,23 @@ function SignUp(props) {
     }
 
 
+    if(info){
+      setTimeout( () =>{
+        setInfo('')
+      },2500)
+   }
+  
+  
     useEffect(() => {
-      if(error){
+    if(error){
         setInfo(error);
-      }
-        setTimeout(
-          ()=>{
-           setInfo('');
-          }
-          ,3000)
-    },[])
+        dispatch({
+          type:USER_REGISTER_FAIL,
+          payload:null
+        })
+    }
+    
+    },[error])
 
     return (
       <>
@@ -71,7 +78,7 @@ function SignUp(props) {
             <Modal.Body>
               <div className="form-content">
                 <Form>
-                    {!isLoading && error ? <div className="flash_info">{error}</div> : null} 
+                    {info && <div className="flash_info">{info}</div>} 
                     <Form.Group>
                         <Form.Control type="email" name="email" placeholder="Email" autoComplete="true" value={email} onChange={(e) => handleChange(e)}/>
                     </Form.Group>

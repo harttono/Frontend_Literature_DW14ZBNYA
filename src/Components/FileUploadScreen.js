@@ -10,10 +10,10 @@ const FileUploads = (props) => {
     const [progress,setProgress] = useState(0);
     const [message,setMessage] = useState("");
     const [urlFiles,setUrlFiles] = useState([]);
-
-    const selectFile = (e) =>{
+    const selectFile = (e) => {
         setSelectedFiles(e.target.files);  
     }
+    
     
     const upload = () =>{
         let currentFile = selectedFiles[0];
@@ -41,11 +41,10 @@ const FileUploads = (props) => {
         if(urlFiles.length > 0){
             localStorage.setItem('url',JSON.stringify(urlFiles))
         }
-        
-
         return () => {
            
         }
+
     }, [urlFiles])
     return (
             
@@ -61,7 +60,7 @@ const FileUploads = (props) => {
                                     <p>Change your profile.</p>
                                     : 
                                     <div>
-                                        <p>1.upload your cover book</p>
+                                        <p>1.upload your cover literature</p>
                                         <p>2.upload you file literature with pdf extension only.</p>
                                     </div>}
                                 </div>
@@ -79,10 +78,9 @@ const FileUploads = (props) => {
                                     )}
                                 </div>
                                 <div className="custom-file">
-                                        <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onChange={selectFile}/>
-                                        <label className="custom-file-label" htmlfor="inputGroupFile01">Choose file</label>
+                                        <input type="file" className="custom-file-input"  onChange={selectFile}/>
+                                    <label className="custom-file-label" htmlfor="inputGroupFile01">choose file</label>
                                 </div>
-
 
                                 <button className="btn btn-success w-100 my-1" disabled={!selectedFiles || urlFiles === 2} onClick={upload}>
                                     Upload
