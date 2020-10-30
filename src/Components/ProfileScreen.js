@@ -14,12 +14,10 @@ function Profile() {
     const [disableText,setDisableText] = useState(true);
     const [dataProfile,setDataProfile] = useState({});
     const [urlProfile,setUrlProfile] = useState('');
-    const [newUrlPicture,setNewUrlPicture] = useState('');
     const [updated,setUpdated] = useState(false);
-    const [message,setMessage] = useState('');
-   
-    let urls = JSON.parse(localStorage.getItem('url')) || [];
 
+
+   
     // update profile 
     const onUpdated = async (userId) => {
 
@@ -39,9 +37,7 @@ function Profile() {
                 type:UPDATE_USER_SUCCESS,
                 payload:picture,
             })
-            if(picture){
-                setNewUrlPicture(picture)
-            }
+
         }catch(err){
             dispatch({
                 type:UPDATE_USER_FAIL,
@@ -52,10 +48,9 @@ function Profile() {
     }
 
 
-    // get url response
-    if(urls.length > 0){
-        setUrlProfile(urls[0].url);
-        localStorage.removeItem('url');
+    // get urls
+    const getUrls = (url) =>{
+        setUrlProfile(url);
     }
 
       
@@ -64,8 +59,8 @@ function Profile() {
         setShow(true);
     }
     const closeModal = () =>{
-        setShow(false);
-        setUpdated(true);
+        setShow(false);   
+        setUpdated(true)
     }
 
 
@@ -73,18 +68,14 @@ function Profile() {
         
         // set data when the first rendering..
         if(userInfo){
-            setNewUrlPicture(userInfo.picture);
+            setUrlProfile(userInfo.picture);
             setDataProfile(userInfo);
         }
          
-        // update picture when state changes
-        if(newUrlPicture){
-            setNewUrlPicture(newUrlPicture);
-        }
-        return () =>{
-            setNewUrlPicture(null)
-        }
-    },[newUrlPicture])
+            return () =>{
+                setUrlProfile(null)
+            }
+        },[])
    
         return (
                  <div className='container text-white'> 
@@ -132,10 +123,10 @@ function Profile() {
                                 </ul>
                                 <div className=" profile__page_picture">
                                     <div className="card card-profile">
-                                        <img src={newUrlPicture} className="card-img-top" alt="..."/>
+                                        <img src={urlProfile} className="card-img-top" alt="..."/>
                                         <div className="card-body">
                                             {updated ? <button className="btn btn-success w-100" onClick={ () => onUpdated(dataProfile.id)}>save</button> :  <button class="btn btn-danger w-100" onClick={openModal}>Change your profile</button>}
-                                            <Fileuploader show={show} able={disableText} closeModal={closeModal}/>
+                                            <Fileuploader show={show} able={disableText} closeModal={closeModal} getUrls = {getUrls}/>
                                         </div>
                                     </div>
                                 </div>

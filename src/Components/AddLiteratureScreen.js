@@ -19,9 +19,9 @@ export default function AddLiteratureScreen(props) {
     const [able,disable] = useState (false);
     const [state,dispatch] = useContext(ProductContext);
     const {isLoading,error,listCategory,newBook:message}  = state;
-    const [urlCover,setUrlCover] = useState('');
-    const [urlFile,setUrlFile] = useState('');
+    const [urlFiles,setUrlFiles] = useState([]);
     const [status,setStatus] = useState('');
+
 
 
     const [formData,setFormData] = useState({
@@ -32,7 +32,7 @@ export default function AddLiteratureScreen(props) {
         ISBN:'',
         description:''
     })
-    const {publication} = formData;
+
  
     const handleChange = (e) =>{
         setFormData({...formData,[e.target.name]:e.target.value})
@@ -45,8 +45,6 @@ export default function AddLiteratureScreen(props) {
         setShow(false);
         props.history.push('/profile')
     }
-
-    let urls = JSON.parse(localStorage.getItem('url')) || [];
 
     const _onFocus = (e) =>{
         e.currentTarget.type='date';
@@ -62,8 +60,8 @@ export default function AddLiteratureScreen(props) {
        },
        pages:formData.pages,
        ISBN:formData.ISBN,
-       attachment:urlFile,
-       cover:urlCover,
+       cover:urlFiles[0],
+       attachment:urlFiles[1],
        status:status,
        description:formData.description
    }
@@ -97,13 +95,14 @@ export default function AddLiteratureScreen(props) {
             setShowMessage(true);
        }
     }
-   
-    // check data url before saving
-    if(urls && urls.length > 0){
-        setUrlCover(urls[0].url);
-        setUrlFile(urls[1].url);
-        localStorage.removeItem('url');
+
+
+    // get urls
+    const getUrls = (urls) =>{
+        setUrlFiles([...urlFiles,urls])
     }
+   
+  
 
     useEffect(() => {
         const getListCategory= async () =>{
@@ -139,6 +138,8 @@ export default function AddLiteratureScreen(props) {
             }           
        }
     },[])
+
+   
  
     return (
         <div className="container">
@@ -173,13 +174,13 @@ export default function AddLiteratureScreen(props) {
                     </div>
                     <div className="form-group">
                         <button type="button" className="upload-btn" onClick={openModal}>
-                        <span> Attach Book File</span><CgAttachment/>      
+                        <span> Attach Literature File</span><CgAttachment/>      
                         </button>
-                        <Fileuploader able={able} show={show} closeModal={() => setShow(false)}/>
+                        <Fileuploader able={able} show={show} closeModal={() => setShow(false)} getUrls = {getUrls}/>
                     </div>
                 </form>
                 <div className="add-book__page-btn">
-                    <button class='add-book-btn' onClick={(e) => onSaved(e)} disabled={urlCover == null}>
+                    <button class='add-book-btn' onClick={(e) => onSaved(e)} disabled={urlFiles == 0}>
                         <span>Add Literature</span><BiBookAdd/>
                     </button>
                     <Message show={showMessage} hide = {closeModal} />
