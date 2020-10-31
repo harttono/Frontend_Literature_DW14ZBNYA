@@ -1,7 +1,6 @@
 {
   "name": "literature",
   "version": "0.1.0",
-  "proxy": "https://literature04.herokuapp.com/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -10,6 +9,7 @@
     "axios": "^0.20.0",
     "bootstrap": "4.5.2",
     "form-data": "^3.0.0",
+    "http-proxy-middleware": "^1.0.6",
     "js-cookie": "^2.2.1",
     "react": "^16.13.1",
     "react-bootstrap": "1.3.0",
