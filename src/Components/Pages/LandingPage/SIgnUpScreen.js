@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React,{useState,useEffect} from 'react';
-import {Modal,Button,Form,Spinner} from 'react-bootstrap';
+import {Modal,Form,Spinner} from 'react-bootstrap';
 import {useAuth} from '../../Provider/authProvider';
 import {USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS,USER_REGISTER_FAIL} from '../../Provider/constants/Constant';
 
@@ -102,7 +102,10 @@ function SignUp(props) {
                         <textarea className="textarea-control" name="address" rows="2"  placeholder="Address" value={address} onChange={(e) => handleChange(e)} />
                     </Form.Group>
                     <Form.Group>
-                        <button className='btn-modal-signUp btn btn__primary outline-0 w-100' onClick={ (e) => handleSubmit(e)}>Sign Up</button>
+                        <button className='btn-modal-signUp btn btn__primary outline-0 w-100' onClick={ (e) => handleSubmit(e)}>
+                        {isLoading ? <Spinner as="span" animation="grow" size="sm" role="status"aria-hidden="true"/> : null}
+                          <span className="sr-only">{' '}</span> Sign Up
+                        </button>
                     </Form.Group>
                     <Form.Group>
                         <div className='exclamation-text'>
