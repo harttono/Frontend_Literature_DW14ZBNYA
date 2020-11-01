@@ -1,11 +1,11 @@
-import Axios from 'axios';
+import {API} from '../../http';
 
 const upload = (file,onUploadProgress) => {
     let formData = new FormData();
 
     formData.append('file',file);
 
-    return Axios.post('/api/v1/upload',formData,{
+    return API.post('/upload',formData,{
         headers:{
             "Content-type":"multipart/form-data"
         },

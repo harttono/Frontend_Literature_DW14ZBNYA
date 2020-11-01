@@ -4,11 +4,10 @@ import {IconContext } from 'react-icons/lib';
 import {useAuth} from './Provider/authProvider';
 import {AdminProductContext} from './Provider/AdminDataProvider';
 import {Link} from 'react-router-dom';
-import Axios from 'axios';
 import Loader from './Loader';
 import {LIST_PRODUCTS_USER_REQUEST,LIST_PRODUCTS_USER_SUCCESS,LIST_PRODUCTS_USER_FAIL, 
      UPDATE_PRODUCT_USER_REQUEST,UPDATE_PRODUCT_USER_SUCCESS,UPDATE_PRODUCT_USER_FAIL,DELETE_PRODUCT_USER_REQUEST,DELETE_PRODUCT_USER_SUCCESS,DELETE_PRODUCT_USER_FAIL} from '../Components/Provider/constants/Constant'
-
+import {API} from '../http';
 
 export default function Admin() {
     const {state:authData} = useAuth();
@@ -24,7 +23,7 @@ export default function Admin() {
             type:LIST_PRODUCTS_USER_REQUEST
         })
     try{
-        const {data:{data}} = await Axios.get(`/api/v1/list_transaction`,{
+        const {data:{data}} = await API.get(`/list_transaction`,{
             headers:{
                 Authorization:`${userInfo.token}`
             }
@@ -50,7 +49,7 @@ export default function Admin() {
                 type:UPDATE_PRODUCT_USER_REQUEST
             })
         try{    
-        const {data:{message}} = await Axios.patch(`api/v1/list-transaction/${id}`,updateData,{
+        const {data:{message}} = await API.patch(`/list-transaction/${id}`,updateData,{
             headers:{
                 Authorization:`${userInfo.token}`
             }
@@ -77,7 +76,7 @@ export default function Admin() {
                 type:DELETE_PRODUCT_USER_REQUEST
             })
         try{    
-        const {data:{message}} = await Axios.delete(`api/v1/list-transaction/${id}`,{
+        const {data:{message}} = await API.delete(`/list-transaction/${id}`,{
             headers:{
                 Authorization:`${userInfo.token}`
             }

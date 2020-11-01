@@ -1,10 +1,9 @@
 import React,{useContext,useState} from 'react';
 import {Modal,Spinner} from 'react-bootstrap';
-import Axios from 'axios';
 import {AdminProductContext} from './Provider/AdminDataProvider';
 import {ADD_CATEGORY_REQUEST,ADD_CATEGORY_SUCCESS,ADD_CATEGORY_FAIL} from './Provider/constants/Constant';
 import {useAuth} from './Provider/authProvider';
-
+import {API} from '../http';
 
 
 function AddCategory(props){
@@ -24,7 +23,7 @@ function AddCategory(props){
                 type:ADD_CATEGORY_REQUEST
             })
         try{    
-        const {data:{message}} = await Axios.post('/api/v1/category',CategoryData,{
+        const {data:{message}} = await API.post('/category',CategoryData,{
             headers:{
                 Authorization:`${userInfo.token}`
             }

@@ -4,9 +4,9 @@ import {FaTransgender,FaPhoneAlt,FaMapMarkerAlt} from 'react-icons/fa';
 import {Spinner} from 'react-bootstrap';
 import {useAuth} from './Provider/authProvider';
 import { UPDATE_USER_FAIL, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS} from './Provider/constants/Constant';
-import Axios from 'axios';
 import MyLiterature from './MyLiteratureScreen';
 import Fileuploader from './FileUploadScreen';
+import {API} from '../http';
 
 function Profile() {
     const {state:authData,dispatch} = useAuth();
@@ -29,7 +29,7 @@ function Profile() {
                 type:UPDATE_USER_REQUEST
             })
         try{    
-        const {data:{picture}} = await Axios.patch(`/api/v1/user/${userId}`,updateData,{
+        const {data:{picture}} = await API.patch(`/user/${userId}`,updateData,{
             headers:{
                 Authorization:`${userInfo.token}`
             }

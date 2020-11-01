@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import {API}from '../../../http';
 import React,{useState,useEffect} from 'react';
 import {Modal,Form,Spinner} from 'react-bootstrap';
 import {useAuth} from '../../Provider/authProvider';
@@ -29,7 +29,7 @@ function SignUp(props) {
         type:USER_REGISTER_REQUEST,
       })
       try{
-        const {data:{data}} = await Axios.post('/api/v1/register',{...formData});
+        const {data:{data}} = await API.post('/register',{...formData});
         dispatch({
           type:USER_REGISTER_SUCCESS,
           payload:data

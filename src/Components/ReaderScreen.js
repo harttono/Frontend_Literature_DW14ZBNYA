@@ -1,11 +1,11 @@
 import React,{useContext,useEffect,useState} from "react";
 import Loader from './Loader';
-import Axios from 'axios';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { Document,Page} from 'react-pdf/dist/esm/entry.webpack';
 import {DETAIL_PRODUCT_REQUEST,DETAIL_PRODUCT_SUCCESS,DETAIL_PRODUCT_FAIL} from './Provider/constants/Constant';
 import {ProductContext} from './Provider/productProvider';
 import {useAuth} from './Provider/authProvider';
+import {API} from '../http';
 function BookViewer(props){
   const [state,dispatch] = useContext(ProductContext);
   const {isLoading,error,detailProduct}  = state;
@@ -19,7 +19,7 @@ function BookViewer(props){
                 type:DETAIL_PRODUCT_REQUEST
             })
         try{
-            const {data:{data}} = await Axios.get(`/api/v1/book/${id}`,{
+            const {data:{data}} = await API.get(`/book/${id}`,{
                 headers:{
                     Authorization:`${userInfo.token}`
                 }

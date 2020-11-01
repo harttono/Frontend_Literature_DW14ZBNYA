@@ -1,4 +1,5 @@
 import React,{useEffect,useContext, useState} from 'react';
+import Axios from 'axios';
 import {Link} from 'react-router-dom';
 import {BiBookmark,BiCloudDownload} from 'react-icons/bi';
 import {useHistory} from 'react-router-dom';
@@ -8,12 +9,12 @@ import {useBookMark} from './Provider/bookmarkProvider';
 import {useParams} from 'react-router-dom';
 import {useAuth} from './Provider/authProvider';
 import Loader from './Loader';
-import Axios from 'axios';
 import {Modal} from 'react-bootstrap';
 import {DETAIL_PRODUCT_REQUEST,DETAIL_PRODUCT_SUCCESS,DETAIL_PRODUCT_FAIL,
         DELETE_PRODUCT_REQUEST,DELETE_PRODUCT_SUCCESSS,DELETE_PRODUCT_FAIL,
         ADD_BOOKMARK_REQUEST,ADD_BOOKMARK_SUCCESS,ADD_BOOKMARK_FAIL,
         REMOVE_BOOKMARK_REQUEST, REMOVE_BOOKMARK_SUCCESS, REMOVE_BOOKMARK_FAIL} from './Provider/constants/Constant';
+import {API} from '../http';
 
 const DetailScreen = (props) => {
 
@@ -38,7 +39,7 @@ const DetailScreen = (props) => {
                 type:DETAIL_PRODUCT_REQUEST
             })
         try{
-            const {data:{data}} = await Axios.get(`/api/v1/book/${id}`,{
+            const {data:{data}} = await API.get(`/book/${id}`,{
                  headers:{
                     Authorization:`${userInfo.token}`
                 }
@@ -66,7 +67,7 @@ const DetailScreen = (props) => {
                 type:ADD_BOOKMARK_REQUEST
             })
         try{    
-        const {data:{data}} = await Axios.get(`/api/v1/bookmark?userId=${userInfo.id}&bookId=${bookId}`,{
+        const {data:{data}} = await API.get(`/bookmark?userId=${userInfo.id}&bookId=${bookId}`,{
             headers:{
                 authorization:`${userInfo.token}`
             }
@@ -95,7 +96,7 @@ const DetailScreen = (props) => {
                 type:REMOVE_BOOKMARK_REQUEST
             })
         try{    
-        const {data:{data}} = await Axios.delete(`/api/v1/bookmark/${bookId}`,{
+        const {data:{data}} = await API.delete(`/bookmark/${bookId}`,{
             headers:{
                 authorization:`${userInfo.token}`
             }
@@ -220,7 +221,7 @@ function DeletedMessage(props) {
             type:DELETE_PRODUCT_REQUEST
         })
     try{
-        const {data:{message}} = await Axios.delete(`/api/v1/book/${productId}`,{
+        const {data:{message}} = await API.delete(`/book/${productId}`,{
             headers:{
                 Authorization:`${userInfo.token}`
             }

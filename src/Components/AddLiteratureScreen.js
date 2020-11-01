@@ -4,10 +4,9 @@ import {CgAttachment} from 'react-icons/cg';
 import {BiBookAdd} from 'react-icons/bi';
 import {LIST_CATEGORY_REQUEST,LIST_CATEGORY_SUCCESS,LIST_CATEGORY_FAIL,ADD_PRODUCT_REQUEST,ADD_PRODUCT_SUCCESS,ADD_PRODUCT_FAIL} from './Provider/constants/Constant';
 import {useAuth} from './Provider/authProvider';
-import Axios from 'axios';
 import {ProductContext} from './Provider/productProvider';
 import Fileuploader from './FileUploadScreen';
-
+import {API} from '../http';
 
 
 export default function AddLiteratureScreen(props) {
@@ -72,7 +71,7 @@ export default function AddLiteratureScreen(props) {
                 type:ADD_PRODUCT_REQUEST
             })
         try{    
-        const {data:{message}} = await Axios.post('/api/v1/book',BookData,{
+        const {data:{message}} = await API.post('/book',BookData,{
             headers:{
                 Authorization:`${userInfo.token}`
             }
@@ -109,7 +108,7 @@ export default function AddLiteratureScreen(props) {
                     type:LIST_CATEGORY_REQUEST
                 })
             try{
-                const {data:{data}} = await Axios.get(`/api/v1/category`,{
+                const {data:{data}} = await API.get(`/category`,{
                     headers:{
                         Authorization:`${userInfo.token}`
                     }

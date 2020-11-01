@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react';
+import {API}from '../../../http';
 import {Modal,Form,Spinner} from 'react-bootstrap';
 import {useAuth} from '../../Provider/authProvider';
 import {USER_SIGNIN_REQUEST,USER_SIGNIN_FAIL, USER_SIGNIN_SUCCESS} from '../../Provider/constants/Constant';
-import Axios from 'axios';
+
 
 function SignIn(props) {
     const {state,dispatch} = useAuth();
@@ -25,7 +26,7 @@ function SignIn(props) {
         type:USER_SIGNIN_REQUEST
       })
     try{
-        const {data:{data}} = await Axios.post('api/v1/login',{email,password});
+        const {data:{data}} = await API.post('/login',{email,password});
       dispatch({
         type:USER_SIGNIN_SUCCESS,
         payload:data

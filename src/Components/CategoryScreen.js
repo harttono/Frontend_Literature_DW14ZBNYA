@@ -1,6 +1,5 @@
 import React,{useContext,useEffect,useState} from 'react';
-import {Modal,Spinner} from 'react-bootstrap';
-import Axios from 'axios';
+import {Modal} from 'react-bootstrap';
 import {AdminProductContext} from './Provider/AdminDataProvider';
 import AddCategory from './AddCategoryScreen';
 
@@ -8,6 +7,7 @@ import {LIST_CATEGORY_REQUEST,LIST_CATEGORY_SUCCESS,LIST_CATEGORY_FAIL,
         REMOVE_CATEGORY_REQUEST, REMOVE_CATEGORY_SUCCESS, REMOVE_CATEGORY_FAIL, 
         EDIT_CATEGORY_REQUEST,EDIT_CATEGORY_SUCCESS,EDIT_CATEGORY_FAIL} from './Provider/constants/Constant';
 import {useAuth} from './Provider/authProvider';
+import {API} from '../http';
 
 function CategoryScreen() {
     const {state:authState} = useAuth();
@@ -51,7 +51,7 @@ function CategoryScreen() {
                 type:REMOVE_CATEGORY_REQUEST
             })
         try{    
-        const {data:{message}} = await Axios.delete(`api/v1/category/${id}`,{
+        const {data:{message}} = await API.delete(`/category/${id}`,{
             headers:{
                 Authorization:`${userInfo.token}`
             }
@@ -80,7 +80,7 @@ function CategoryScreen() {
         })
     try{
 
-        const {data:{data}} = await Axios.get('/api/v1/category',{
+        const {data:{data}} = await API.get('/category',{
             headers:{
                 Authorization:`${userInfo.token}` 
             }
@@ -110,7 +110,7 @@ function CategoryScreen() {
                 type:EDIT_CATEGORY_REQUEST
             })
         try{    
-        const {data:{message}} = await Axios.patch(`api/v1/category/${id}`,updateData,{
+        const {data:{message}} = await API.patch(`/category/${id}`,updateData,{
             headers:{
                 Authorization:`${userInfo.token}`
             }

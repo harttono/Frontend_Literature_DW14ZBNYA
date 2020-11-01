@@ -2,14 +2,13 @@ import React,{useContext,useState,useEffect} from 'react'
 import {BsSearch} from 'react-icons/bs';
 import Loader from './Loader';
 import {Link} from 'react-router-dom';
-import Axios from 'axios';
 import {ProductContext} from './Provider/productProvider';
 import {useBookMark} from './Provider/bookmarkProvider';
 import {useAuth} from './Provider/authProvider';
 import {LIST_PRODUCTS_REQUEST,LIST_PRODUCTS_SUCCESS,LIST_PRODUCTS_FAIL, 
         CHECK_BOOKMARK_REQUEST,CHECK_BOOKMARK_SUCCESS,CHECK_BOOKMARK_FAIL, 
         GET_PRODUCTS_BY_PUBLICATION_REQUEST,GET_PRODUCTS_BY_PUBLICATION_SUCCESS, GET_PRODUCTS_BY_PUBLICATION_FAIL} from './Provider/constants/Constant';
-
+import {API} from '../http';
 
 
 const HomeScreen = (props) => {
@@ -51,7 +50,7 @@ const HomeScreen = (props) => {
         })
     try{
 
-        const {data:{data}} = await Axios.get('/api/v1/books',{
+        const {data:{data}} = await API.get('/books',{
             params:params,
             headers:{
                 Authorization:`${userInfo.token}` 
@@ -93,7 +92,7 @@ const HomeScreen = (props) => {
             type:CHECK_BOOKMARK_REQUEST
         })
         try{
-        const {data:{data}} = await Axios.get(`/api/v1/bookmarks`,{
+        const {data:{data}} = await API.get(`/bookmarks`,{
             headers:{
                 Authorization:`${userInfo.token}`
             }
@@ -122,7 +121,7 @@ const HomeScreen = (props) => {
             type:GET_PRODUCTS_BY_PUBLICATION_REQUEST
         })
         try{
-        const {data:{data}} = await Axios.get(`/api/v1/getbooks`,{
+        const {data:{data}} = await API.get(`/getbooks`,{
             headers:{
                 Authorization:`${userInfo.token}`
             }

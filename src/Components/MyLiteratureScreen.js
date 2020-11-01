@@ -3,8 +3,8 @@ import {ProductContext} from './Provider/productProvider';
 import {useAuth} from './Provider/authProvider';
 import {Link} from 'react-router-dom';
 import Loader from './Loader';
-import Axios from 'axios';
 import {MY_PRODUCTS_REQUEST,MY_PRODUCTS_SUCCESS,MY_PRODUCTS_FAIL} from './Provider/constants/Constant';
+import {API} from '../http';
 
 export default function CartScreen() {
     const [state,dispatch] = useContext(ProductContext);
@@ -18,7 +18,7 @@ export default function CartScreen() {
                 type:MY_PRODUCTS_REQUEST
             })
         try{
-            const {data:{data}} = await Axios.get(`/api/v1/mybooks`,{
+            const {data:{data}} = await API.get(`/mybooks`,{
                 headers:{
                     Authorization:`${userInfo.token}`
                 }
