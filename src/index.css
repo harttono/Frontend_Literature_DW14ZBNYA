@@ -474,26 +474,33 @@ body{
     justify-content:space-between;
     align-items:center;
 }
-.category-section >table thead > tr > th:last-child{
+.category-section > table > thead > tr > th:last-child{
     text-align:right;
 }
-.category-section >table tbody > tr > td:last-child{
+.category-section > table > tbody > tr > td:last-child{
     text-align:right;
 }
 
-
-.admin-section thead{
+.admin-section table {
+    width:100%;
+}
+.admin-section table > thead{
     color:#ffffff;
 }
-.admin-section tbody{
+.admin-section table > tbody{
     background-color:#f8eeee;
 }
-.admin-section thead > tr > th:last-child{
+.admin-section table > thead > tr > th:last-child{
     text-align:center;
 }
-.admin-section tbody > tr > td:last-child{
+.admin-section table > tbody > tr > td:last-child{
     text-align:center;
 }
+.admin-section table > tbody > tr > td:nth-child(4){
+   text-align:center;
+}
+
+
 .navbar{
     box-shadow:5px 5px 8px rgba(0,0,0,.6);
     position:fixed !important;
@@ -516,7 +523,7 @@ body{
     box-shadow:.4rem .4rem 1rem rgba(0,0,0,0.1);
     border-radius:50%;
     position: absolute;
-    top:-.1rem;
+    top:-.5rem;
     left:-.8rem;
 }
   

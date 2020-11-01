@@ -33,6 +33,7 @@ export default function AddLiteratureScreen(props) {
         description:''
     })
 
+    console.log('sis formDdta',formData)
  
     const handleChange = (e) =>{
         setFormData({...formData,[e.target.name]:e.target.value})
@@ -46,20 +47,18 @@ export default function AddLiteratureScreen(props) {
         props.history.push('/profile')
     }
 
-    const _onFocus = (e) =>{
-        e.currentTarget.type='date';
-    }
+ 
    
     // add new data 
    const BookData = {
        title:formData.title,
        author:formData.author,
-       publication:formData.publication,
+       publication:parseInt(formData.publication),
        category:{
            id:categoryId
        },
-       pages:formData.pages,
-       ISBN:formData.ISBN,
+       pages:parseInt(formData.pages),
+       ISBN:parseInt(formData.ISBN),
        cover:urlFiles[0],
        attachment:urlFiles[1],
        status:status,
@@ -153,7 +152,7 @@ export default function AddLiteratureScreen(props) {
                         <input type="text" name="author" autoComplete="off" onChange={ (e) => handleChange(e)} className="form-control" placeholder="Author"/>
                     </div>
                     <div className="form-group">
-                        <input type="text" name="publication" onFocus={ _onFocus}  autoComplete="off" onChange={ (e) => handleChange(e)} className="form-control" placeholder="Publication Date" />
+                        <input type="text" name="publication"   autoComplete="off" onChange={ (e) => handleChange(e)} className="form-control" placeholder="Publication Date" />
                     </div>
                     <div className="form-group">
                         <select className=" w-100  p-2 select-category"  onChange={ (e) => setCategoryId(e.target.value)}>

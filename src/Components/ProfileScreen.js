@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {MdLocalPostOffice} from 'react-icons/md';
 import {FaTransgender,FaPhoneAlt,FaMapMarkerAlt} from 'react-icons/fa';
+import {Spinner} from 'react-bootstrap';
 import {useAuth} from './Provider/authProvider';
 import { UPDATE_USER_FAIL, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS} from './Provider/constants/Constant';
 import Axios from 'axios';
@@ -9,7 +10,7 @@ import Fileuploader from './FileUploadScreen';
 
 function Profile() {
     const {state:authData,dispatch} = useAuth();
-    const {isLoading,error,userInfo,info} = authData;
+    const {isLoading,error,userInfo} = authData;
     const [show,setShow] = useState(false);
     const [disableText,setDisableText] = useState(true);
     const [dataProfile,setDataProfile] = useState({});
@@ -125,7 +126,9 @@ function Profile() {
                                     <div className="card card-profile">
                                         <img src={urlProfile} className="card-img-top" alt="..."/>
                                         <div className="card-body">
-                                            {updated ? <button className="btn btn-success w-100" onClick={ () => onUpdated(dataProfile.id)}>save</button> :  <button class="btn btn-danger w-100" onClick={openModal}>Change your profile</button>}
+                                            {updated ? <button className="btn btn-success w-100" onClick={ () => onUpdated(dataProfile.id)}>
+                                            {isLoading ? <Spinner as="span" animation="grow" size="sm" role="status"aria-hidden="true"/> : null}
+                                            <span className="mx-2">{' '}</span>save</button> :  <button class="btn btn-danger w-100" onClick={openModal}>Change your profile</button>}
                                             <Fileuploader show={show} able={disableText} closeModal={closeModal} getUrls = {getUrls}/>
                                         </div>
                                     </div>
