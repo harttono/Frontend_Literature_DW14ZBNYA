@@ -6,6 +6,7 @@ import {LIST_CATEGORY_REQUEST,LIST_CATEGORY_SUCCESS,LIST_CATEGORY_FAIL,ADD_PRODU
 import {useAuth} from './Provider/authProvider';
 import {ProductContext} from './Provider/productProvider';
 import Fileuploader from './FileUploadScreen';
+import PdfUploader from '../Components/services/PdfUploder';
 import {API} from '../http';
 import path from 'path';
 import { Formik} from "formik";
@@ -23,6 +24,7 @@ export default function AddLiteratureScreen(props) {
     const [cover,setCover] = useState('');
     const [file,setFile] = useState('');
     const [status,setStatus] = useState('');
+    const [visible,setVisible] = useState(false);
 
 
     const openModal = () => setShow(true);
@@ -82,16 +84,20 @@ export default function AddLiteratureScreen(props) {
     // get urls
     const getUrls = (url) =>{
         const ext = path.extname(url).toLowerCase();
-        console.log('isi url',url)
         if(ext === '.png' || ext === '.jpg' || ext === '.jpeg'){
             setCover(url);
-        }else if(ext === '.pdf'){
-            setFile(url);
-        }    
+        }
+   
     }
 
     console.log('isi cover',cover+'file : '+file)
    
+    const getPdfUrl = (pdfUrl) =>{
+        if(pdfUrl){
+            setFile(pdfUrl); 
+        }   
+    }
+
   
 
     useEffect(() => {
@@ -253,15 +259,21 @@ export default function AddLiteratureScreen(props) {
                     </Form.Group>
                     <Form.Group>
                         <button type="button" className="upload-btn" onClick={openModal}>
-                        <span> Attach Literature File</span><CgAttachment/>      
+                            <span> Attach Literature Cover</span><CgAttachment/>      
                         </button>
-                        <Fileuploader isAddLiterature={true} types={['.png','.jpg','.jpeg','.pdf']} show={show} closeModal={() => setShow(false)} getUrls = {getUrls}/>
+                        <Fileuploader isAddLiterature={true} types={['.png','.jpg','.jpeg']} show={show} closeModal={() => setShow(false)} getUrls = {getUrls}/>
+                    </Form.Group>
+                    <Form.Group>
+                        <button type="button" className="upload-btn" onClick={ () => setVisible(true)}>
+                            <span> Attach File</span><CgAttachment/>      
+                        </button>
+                        <PdfUploader visible={visible} onClose={() => setVisible(false)} getPdfUrl={getPdfUrl}/>
                     </Form.Group>
                 <div className="add-book__page-btn">
                     <button className='add-book-btn' type="submit" disabled={file =='' || cover ==''} >
                         <span>Add Literature</span><BiBookAdd/>
                     </button>
-                    <Message show={showMessage} hide = {closeModal} />
+                    <Message show={showMessage} hide = {closeModal}  />
                 </div>
                 </Form>
                 )}

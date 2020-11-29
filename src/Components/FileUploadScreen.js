@@ -12,7 +12,6 @@ const FileUploads = (props) => {
     
     const selectFile = (e) => {
         const ext = path.extname(e.target.files[0].name);
-        console.log('isi fle ext',props.types);
         let isValid = props.types.some( type => type === ext);
         if(!isValid){
                setNotify('Use extension properly !!!');
@@ -73,11 +72,10 @@ const FileUploads = (props) => {
                                 <div className="d-flex justify-content-center flex-column">
                                     {props.isAddLiterature ?
                                     <div>
-                                        <p>1.upload your cover literature</p>
-                                        <p>2.upload your literature with pdf extension only.</p>
+                                        <p className="text-center">{'>>>.upload your literature with pdf extension only.<<<'}</p>
                                     </div>
                                     : 
-                                    <p>Change your profile.</p>}
+                                    <p className="text-center">{'>>>.Change your profile.<<<'}</p>}
                                 </div>
                                 <div className="py-3 progress-loader">
                                     {currentFile && (
