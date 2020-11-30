@@ -25,8 +25,8 @@
 ![collection](https://user-images.githubusercontent.com/58875585/97809455-916ab780-1c9f-11eb-95ab-239457c964bb.png)
 
 ### DEMO
-tap here for demo : https://literaturez.netlify.app/
+for demo you can click this is link : https://literaturez.netlify.app/
 login as Admin :
-email:harttonz@gmail.com
-password:harttonz04
+## email:harttonz@gmail.com
+## password:harttonz04
 
