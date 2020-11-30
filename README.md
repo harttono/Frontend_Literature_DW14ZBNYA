@@ -26,19 +26,19 @@
 ### FEATURES
 ## Login And Register
 ## USER
- 1.Searching Literature
- 2.Change photo profile
- 3.Add Literature
- 4.Delete Literature
- 5.Add Literature to Collection
- 6.Remove Literature from Collection
- 7.Download Literature
+ ## 1.Searching Literature
+ ## 2.Change photo profile
+ ## 3.Add Literature
+ ## 4.Delete Literature
+ ## 5.Add Literature to Collection
+ ## 6.Remove Literature from Collection
+ ## 7.Download Literature
 ## Admin
- 1.Approve,Delete,Cancel of user's Literature
- 2.Sort List of Verification by status
- 3.Add Literature
- 4.Add Literature to Collection
- 5.Manage category data such as add,update and delete
+ ## 1.Approve,Delete,Cancel of user's Literature
+ ## 2.Sort List of Verification by status
+ ## 3.Add Literature
+ ## 4.Add Literature to Collection
+ ## 5.Manage category data such as add,update and delete
 
 
 ### DEMO
