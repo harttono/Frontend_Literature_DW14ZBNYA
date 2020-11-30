@@ -22,7 +22,7 @@
 
 ### MY COLLECTION
 
-![collection](https://user-images.githubusercontent.com/58875585/97809455-916ab780-1c9f-11eb-95ab-239457c964bb.png)ure
+![collection](https://user-images.githubusercontent.com/58875585/97809455-916ab780-1c9f-11eb-95ab-239457c964bb.png)
 ### FEATURES
 ## Login And Register
 ## USER
