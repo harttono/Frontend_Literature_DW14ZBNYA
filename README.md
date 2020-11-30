@@ -22,7 +22,24 @@
 
 ### MY COLLECTION
 
-![collection](https://user-images.githubusercontent.com/58875585/97809455-916ab780-1c9f-11eb-95ab-239457c964bb.png)
+![collection](https://user-images.githubusercontent.com/58875585/97809455-916ab780-1c9f-11eb-95ab-239457c964bb.png)ure
+### FEATURES
+## Login And Register
+## USER
+ 1.Searching Literature
+ 2.Change photo profile
+ 3.Add Literature
+ 4.Delete Literature
+ 5.Add Literature to Collection
+ 6.Remove Literature from Collection
+ 7.Download Literature
+## Admin
+ 1.Approve,Delete,Cancel of user's Literature
+ 2.Sort List of Verification by status
+ 3.Add Literature
+ 4.Add Literature to Collection
+ 5.Manage category data such as add,update and delete
+
 
 ### DEMO
 for demo you can click this is link : https://literaturez.netlify.app/
